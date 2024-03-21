@@ -68,14 +68,6 @@ struct ContentView: View {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         guard answer.count > 0 else { return }
         
-        guard hasTwoLetters(word: answer) else {
-            wordError(title: "No one letter words", message: "Think of another word.")
-            return
-        }
-        guard isOriginal(word: answer) else {
-            wordError(title: "Word used already", message: "Think of another")
-            return
-        }
         guard isPossible(word: answer) else {
             wordError(title: "Word is not possible", message: "Use letters that appear in root word!")
             return
@@ -84,6 +76,16 @@ struct ContentView: View {
             wordError(title: "Word is not real", message: "Think of an existing word.")
             return
         }
+        guard hasTwoLetters(word: answer) else {
+            wordError(title: "No one letter words", message: "Think of another word.")
+            return
+        }
+        guard isOriginal(word: answer) else {
+            wordError(title: "Word used already", message: "Think of another")
+            return
+        }
+        
+        
         
         withAnimation {
             usedWords.insert(answer, at: 0)
