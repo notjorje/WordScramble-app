@@ -67,6 +67,10 @@ struct ContentView: View {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         guard answer.count > 0 else { return }
         
+        guard hasTwoLetters(word: answer) else {
+            wordError(title: "No one letter words", message: "Think of another word.")
+            return
+        }
         guard isOriginal(word: answer) else {
             wordError(title: "Word used already", message: "Think of another")
             return
@@ -118,6 +122,12 @@ struct ContentView: View {
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
         
         return misspelledRange.location == NSNotFound
+    }
+    func hasTwoLetters(word: String) -> Bool {
+        if word.count == 1 {
+            return false
+        }
+        return true
     }
     
     func wordError(title: String, message: String) {
