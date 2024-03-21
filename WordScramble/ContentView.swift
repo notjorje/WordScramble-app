@@ -53,6 +53,7 @@ struct ContentView: View {
                 
             Button() {
                 startGame()
+                usedWords.removeAll()
             } label: {
                 Text("New Word").frame(maxWidth: .infinity, alignment: .center)
             }
